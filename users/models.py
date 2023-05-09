@@ -6,7 +6,7 @@ from .forms import SignUpForm
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError('이메일 주소는 필수 입력값입니다.')
 
         user = self.model(
             email=self.normalize_email(email),

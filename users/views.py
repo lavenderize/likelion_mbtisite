@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm
+from django.contrib import messages
 
 def signup(request):
     if request.method == 'POST':
@@ -25,6 +26,8 @@ def user_login(request):
         if user is not None:
             login(request, user)
             return redirect('home')
+        else:
+            messages.error(request, '올바르지 않은 이메일 또는 비밀번호입니다.')
     return render(request, 'login.html')
 
 def user_logout(request):
