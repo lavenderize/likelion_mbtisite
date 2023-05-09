@@ -7,4 +7,18 @@
   <input type="password" name="password" required>
 
   <button type="submit">로그인</button>
+
+  {% if form.errors %}
+    <p>올바르지 않은 이메일 또는 비밀번호입니다.</p>
+  {% endif %}
+
 </form>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+

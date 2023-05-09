@@ -16,14 +16,16 @@ class SignUpForm(UserCreationForm):
             'password2': '비밀번호 확인',
             'nickname': '닉네임',
         }
-        
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['email'].label = '이메일'
-            self.fields['password1'].label = '비밀번호'
-            self.fields['password2'].label = '비밀번호 확인'
-            self.fields['nickname'].label = '닉네임'
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = self.cleaned_data['email']
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(max_length=254, required=True)
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
