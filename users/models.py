@@ -1,7 +1,7 @@
 # project/users/models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-from .forms import SignUpForm
+# from .forms import SignUpForm
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
